@@ -1,0 +1,118 @@
+1、let定义变量：它是块级作用域， 只在当前{ }中起作用
+
+2、const定义常量：常量的值就是内存地址，不能改变的量
+
+3、数组解构：数组解构允许我们按照一一对应的关系从数组中提取值然后将值赋给变量
+实例：数组：let  [a,b,c]=[1,2,3]
+          	   console.log(a,b,c)
+
+          对象：1、let {name，age}={name：“张三”，age：18}	
+         	        console.log(name，age)      ****（注意：属性名是无序的，是按照属性名进行匹配）
+                    2、let {name：youName，age：youAge}={name：“张三”，age：18}	
+          	         console.log(youName，youAge}****（注意：属性名是无序的，是按照属性名进行匹配）
+
+4、箭头函数
+	（形参）=>{ 函数体 }  或 const fn =（形参）=>{ 函数体 }
+	注意：1、调用箭头函数则需要将其赋予一个常量、然后使用 fn(形参) 调用函数
+	          2、在箭头函数中、如果函数体中只有一句代码，并且代码的执行结果就是函数的返回值，则函数体的大括号可以省略
+	          （实例：const  sum = (n1 ,n2) => n1 + n2 ）
+	          3、在箭头函数中、如果函数体形参中只有一个参数，则函数体形参外围的小括号可以省略
+	          （实例：const  sum = n1 => n1 ）
+
+5、箭头函数不绑定this、箭头函数没有自己的this关键字、如果在箭头函数中使用this、this的指向将是函数定义位置中的this（注意：call可以改变this的指向）
+
+6、剩余参数：（...）
+	1、实例：function sum (first,...args) {
+		console.log(first);  //输出10
+		console.log(args);  //输出[20,30]
+	          }
+	          sum(10,20,30)
+	2、实例：let [s1,...s2] = ['01','02','03']
+	               console.log(s1);  //输出'01'
+	               console.log(s2);  //输出['02','03']
+
+7、Array的扩展运算符（扩展运算符可以将数值或者对象以逗号分隔的参数序列）：（...）
+	实例 (分) ：let ary = [1,2,3]
+	          	...ary // 扩展结果为1,2,3
+	实例 (合) ：let ary1 = [1,2,3]
+	          	 let ary2 = [4,5,6]
+	          	 let ary3 = [...ary1,...ary2]  //输出[1,2,3,4,5,6]
+	          	 或者：let ary = [ ]
+		          ary.push(...ary1,...ary2)
+
+8、Array.find():Array为数值名、此方法用于查找第一个符合条件的数组成员（item），有则返回当前项，如果没有则返回undefined
+	实例：let ary=[
+		{id:1; name:"张三" }，
+		{id:2; name:"李四"}]
+	           let target = ary.find( (item)=>{    //item为数组中的每一项
+		return item.id == 2               // item.id == 2为判断条件
+	           })
+
+
+
+9、Array.findIndex():Array为数值名、用于查找第一个符合条件的数组成员位置（index索引），如果没用找到返回-1
+	实例：let ary = [10,15,20,30]
+	          ary.findIndex( (item) =>{
+		return item>15
+	          })
+
+
+10、Array.forEach():Array为数值名、用于循环遍历数组的每一项值
+	实例：let ary = [10,15,20,30]
+	          ary.forEach( ( item, index ) =>{
+		console.log( item,index )      //item是循环出来的值，index则为数组对应的下标
+	          })
+
+11、Array.includes("判断值"):Array为数值名、判断数组中是否包含某值，包含则返回true，反之则返回false
+（注意:使用includes:1、这不是一个回调函数 2、数组中存在的对象或者数组不能作为“判断值”进行判断）、列如[ "a", "b", { name:"吴海", age:18 }, [ 1, 2, 3 ], "s" ]中的对象和数组则无法判断,其他的可以判断是否存在
+
+12、String.repeat(重复次数)：String为字符串，repeat方法表示将原字符串重复n次，返回一个新字符串
+
+
+13、String.startsWith("判断字符串")，String.endWith("判断字符串")：String为字符串，此两个方法分别判断字符串是以什么开头和结尾，返回值为true或false
+
+14、for...in循环出的是key，for...of循环出的是value
+	for...in实例：let a={ name:"张三"，age:18，date:"2020/09/18"} 或者 [ 1，2，3，4 ]
+	          for ( var item in a ){
+	          	console.log( item，a[item] )
+	          }	
+	1、for...in可以循环数组和对象。
+	2、对象循环出来的item则为键名，数组循环出来的item是数组下标。
+	3、建议不与数组一起使用 。
+	
+	for...of实例：let a=[ { name:"张三"，age:18 },{ name:"李四"，age:19 },{ name:"王五"，age:20 } ]或者 [ 1，2，3，4 ]
+		for( var item of a ){
+			console.log( item ）
+		}
+	1、for...of只可以循环数组，不可以循环对象；如果循环的值是对象，则还可以通过 item.键名 获取具体值。
+	2、循环出来的item是数组的每一项。
+	3、给数组加自定义属性for...of不能循环出来，for...in可以循环出来。
+
+15、模板字符串 ` `：使用``是定义模板字符串，使用变量则${变量名}，且字符串识别标签
+	实例：`<div>${变量}</div>`
+
+16、Set数据结构：它类似于数组，但是成员的值是唯一的，没有重复的值。
+	创建Set: const sum=new Set()  
+	使用Set: const sum=new Set(数组) //则实现数组去重
+	Set实例方法：const s=new Set();
+	                     s.add(1).add(2).add(3);    //向set结构中添加值
+	                     s.delete(2);    //删除set结构中为2的值，返回为布尔值
+	                     s.has(2);    //表示set结构中是否有2这个值，返回为布尔值
+	                     s.clear();    //删除set结构中所有的值，无返回值
+	遍历Set数据结构(s.forEach()从中取值)：const s =new Set([1,2,3,4,5])
+				          s.forEach( (value,index)=>{ 
+					console.log(value,index)
+				           })
+	
+17、map():对每一项数据进行处理，替换当前位置的值，且返回的是一个新数组
+	var obj = [{name:'小明',age:16,sex:'男'},
+ 		{name:'小红',age:17,sex:'女'},
+  		{name:'小白',age:18,sex:'女'}]
+	var sum = obj.map( ( item,index,array )=> {
+	  	console.log(item.age);
+		return item
+ 	 	}) //map可以接受三个参数item为当前项的值，index为当前项的下标，array 为被遍历的数组本身（因为返回的是一个新的数组，所以对每项数据进行处理时可以考虑使用）
+
+
+	
+	
